@@ -37,7 +37,7 @@ Use directives to modify the dom
     {{i}}-{{product.name}}
   </li>
 </ul>
-```
+```html
 <ul>
     <!-- one of the exported values is index alias as i -->
     <!-- index is number type -->
@@ -46,10 +46,39 @@ Use directives to modify the dom
     {{i}}-{{product.name}} <span *ngIf='isEven'>EVEN</span>
   </li>
 </ul>
+
 ```
 **Reference for ngForOf**
 here we can see the exported values
 https://angular.io/api/common/NgForOf
+
+## ngFor and Change Detection
+    how ngFor directives response to the  changes in the components state
+
+## ngFor trackBy
+```js
+productsTwo;
+  loadProducts(){
+    this.productsTwo=[
+      {id:1,name:'Apples'},
+    {id:2,name:'Bananas'},
+    {id:3,name:'Grapes'}
+    ]
+  }
+  trackProduct(index,product){
+     return product ? product.id :undefined;
+  }
+```
+```html
+<h2>Simulating Rendering data from external apis</h2>
+<button (click)="loadProducts()">Add Item</button>
+<ul>
+  <!-- trackProduct is function reference use this for large objects every time redownloading data its compares if object has same id it wont redownload -->
+  <li *ngFor="let product of productsTwo;trackBy:trackProduct">
+    {{product.name}}  
+  </li>
+</ul>
+```
 ## ngIf
     there are times we want to show or hide part of a page depending on some condition
     - if condition evaluates true element will be added to the dom otherwise removed from dom.

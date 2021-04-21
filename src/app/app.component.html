@@ -61,8 +61,20 @@ no courses
   <div *ngSwitchDefault>something went wrong</div>
 </div>
 <h1>Rendering Products using ngForOf directive</h1>
+<button (click)="onAdd()">Add Item</button>
 <ul>
   <li *ngFor="let product of products;index as i even as isEven">
     {{i}}-{{product.name}} <span *ngIf='isEven'>EVEN</span>
+    <button  (click)="onRemove(product)"class="btn btn-danger">remove</button>
+    <button  (click)="onChange(product)"class="btn btn-primary">Update</button>
+  </li>
+</ul>
+
+<h2>Simulating Rendering data from external apis</h2>
+<button (click)="loadProducts()">Add Item</button>
+<ul>
+  <!-- trackProduct is function reference use this for large objects every time redownloading data its compares if object has same id it wont redownload -->
+  <li *ngFor="let product of productsTwo;trackBy:trackProduct">
+    {{product.name}}  
   </li>
 </ul>
