@@ -38,5 +38,25 @@
 <ng-template [ngIf]="1>0">
   <p>hi</p>
 </ng-template>
-
+<!-- <div [hidden]="courses.length === 0"> 
+  List of Courses
+</div>
+<div [hidden]="courses.length >0">
+no courses
+</div> -->
 <!-- which means ng-template rendered via other ng-directives or template reference variables (i.e)#variableName -->
+
+<ul class="nav nav-pills">
+  <!-- [class.active] class binding -->
+  <li class="nav-item "><a  class="nav-link" [class.active]="viewMode=='map'" (click)="viewMode='map'">Map View</a></li>
+  <li class="nav-item"><a  class="nav-link" [class.active]="viewMode=='list'" (click)="viewMode='list'">List View</a></li>
+</ul>
+<!-- rendering part based on above click events -->
+
+<!-- [ngSwitch] is default directive and this is called property binding  -->
+<div [ngSwitch]="viewMode">
+  <!-- if viewMode="map" -->
+  <div *ngSwitchCase="'map'">Map View Content</div>
+  <div *ngSwitchCase="'list'">List View Content</div>
+  <div *ngSwitchDefault>something went wrong</div>
+</div>

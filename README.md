@@ -15,7 +15,7 @@ Use directives to modify the dom
     - if condition evaluates true element will be added to the dom otherwise removed from dom.
 **NOTE**
     After seen the below examples navigate to `app.module.ts` and `app.component.html`
-    
+
 `app.component.html`
 older approach
 ```html
@@ -47,7 +47,69 @@ modern approach 2
     no courses
     </ng-template>
 ```
+another approach to hide elements using html hidden attribute in html
+but this approach will not remove element from dom
+
+```html
+<!-- if false means show true means hidden indirectly -->
+<div [hidden]="courses.length === 0"> 
+        List of Courses
+    </div>
+    <div [hidden]="courses.length >0">
+    no courses
+    </div>
+```
 ## ngSwitchCase
+its is similar to switch case in other programming languages
+- with this we can conditionaly render elements
+- we can use this to build tabs
+- we can also we ngIf but it evaluates only boolean values
+- so there are some situations we need this 
+```html
+<ul class="nav nav-pills">
+  <li class="nav-item "><a href="" class="nav-link active">Map View</a></li>
+  <li class="nav-item"><a href="" class="nav-link">List View</a></li>
+</ul>
+<div>
+  <div>Map View Content</div>
+  <!-- <div>List View Content</div> -->
+```
+`app.componnent.ts`
+```js
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  courses=["C","C++"];
+  // courses=[];
+  viewMode="map";
+  title = 'angular-directives-learning';
+}
+
+```
+`app.componnent.html`
+```html
+<ul class="nav nav-pills">
+  <!-- [class.active] class binding -->
+  <li class="nav-item "><a  class="nav-link" [class.active]="viewMode=='map'" (click)="viewMode='map'">Map View</a></li>
+  <li class="nav-item"><a  class="nav-link" [class.active]="viewMode=='list'" (click)="viewMode='list'">List View</a></li>
+</ul>
+<!-- rendering part based on above click events -->
+
+<!-- [ngSwitch] is default directive and this is called property binding  -->
+<div [ngSwitch]="viewMode">
+  <!-- if viewMode="map" -->
+  <div *ngSwitchCase="'map'">Map View Content</div>
+  <div *ngSwitchCase="'list'">List View Content</div>
+  <div *ngSwitchDefault>something went wrong</div>
+</div>
+```
+**References**
+https://angular.io/api/common/NgSwitch
 ## ngClass
 ## ngStyle
 ## Building Custom Directives

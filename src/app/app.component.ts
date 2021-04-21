@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   courses=["C","C++"];
   // courses=[];
+  viewMode="map";
   title = 'angular-directives-learning';
 }
