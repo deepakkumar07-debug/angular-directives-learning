@@ -1,27 +1,49 @@
 # AngularDirectivesLearning
+Use directives to modify the dom
+## Two types of directives
+ ### Structural Directives
+    Modify the Structure of the Dom by adding or removing dom elements
+    prefix * when using Structural directives
+ ### Attribute
+    Modify the Attribute of Dom elements   
+## ngFor
+ one of the built in directives in angular we used to rendering lists
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.15.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## ngIf
+    there are times we want to show or hide part of a page depending on some condition
+    - if condition evaluates true element will be added to the dom otherwise removed from dom.
+`app.component.html`
+older approach
+```html
+    <div *ngIf="courses.length > 0">
+        List of Courses
+    </div>
+    <div *ngIf="courses.length ===0">
+    no courses
+    </div>
+```
+modern approach
+```html
+    <div *ngIf="courses.length > 0; else noCourses">
+        List of Courses
+    </div>
+    <!-- #tempplateVariable -->
+    <ng-template #noCourses> 
+    no courses
+    </ng-template>
+```
+modern approach 2
+```html
+    <div *ngIf="courses.length > 0; then courseList else noCourses"></div>
+     <ng-template #courseList> 
+        list of courses
+    </ng-template>
+    <!-- #tempplateVariable -->
+    <ng-template #noCourses> 
+    no courses
+    </ng-template>
+```
+## ngSwitchCase
+## ngClass
+## ngStyle
+## Building Custom Directives
