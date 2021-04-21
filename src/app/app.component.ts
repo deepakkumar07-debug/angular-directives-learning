@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  // courses=["C","C++"];
-  courses=[];
+  courses=["C","C++"];
+  // courses=[];
   title = 'angular-directives-learning';
 }

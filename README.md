@@ -1,5 +1,6 @@
 # AngularDirectivesLearning
 Use directives to modify the dom
+
 ## Two types of directives
  ### Structural Directives
     Modify the Structure of the Dom by adding or removing dom elements
@@ -12,6 +13,9 @@ Use directives to modify the dom
 ## ngIf
     there are times we want to show or hide part of a page depending on some condition
     - if condition evaluates true element will be added to the dom otherwise removed from dom.
+**NOTE**
+    After seen the below examples navigate to `app.module.ts` and `app.component.html`
+    
 `app.component.html`
 older approach
 ```html

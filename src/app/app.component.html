@@ -8,13 +8,16 @@
  <h2>Sorry No courses</h2>
 </div> -->
 
-<div *ngIf="courses.length >0; else noCourses">
+<div *ngIf="courses.length >0;then courseList else noCourses"></div>
+
+<ng-template #courseList>
   <ul>
     <li *ngFor="let course of courses">{{course}}</li>
   </ul>
-</div>
+</ng-template>
 
 <!-- we naming this block as noCourses -->
+
 <ng-template #noCourses >
  <h2>Sorry No courses</h2>
 </ng-template>
@@ -35,3 +38,5 @@
 <ng-template [ngIf]="1>0">
   <p>hi</p>
 </ng-template>
+
+<!-- which means ng-template rendered via other ng-directives or template reference variables (i.e)#variableName -->
