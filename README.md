@@ -179,6 +179,34 @@ export class AppComponent {
 ```
 **References**
 https://angular.io/api/common/NgSwitch
+
+## The Leading Asterisk
+When we use leading asterisk with our structural directives like `*ngIf *ngFor ngSwitchCase` angular is going to re-write that block into `ng-template`
+- we can also write ng-template way but it much easier to use leading asterisk. let angular do the hard work
+- if we use 
+```html
+<div *ngIf="courses.length > 0; else noCourses">
+        List of Courses
+    </div>
+    <!-- #tempplateVariable -->
+    <ng-template #noCourses> 
+    no courses
+    </ng-template>
+```
+- behind the scene angular does 
+```html
+<!-- property binding -->
+<ng-template [ngIf]="courses.length > 0">
+    <!-- it wraps the above ngIf div like this -->
+    <div>
+        List of Courses
+    </div>
+</ng-template>
+    <!-- #tempplateVariable -->
+    <ng-template [ngIf]="!(courses.length > 0)"> 
+    no courses
+    </ng-template>
+```
 ## ngClass
 ## ngStyle
 ## Building Custom Directives
