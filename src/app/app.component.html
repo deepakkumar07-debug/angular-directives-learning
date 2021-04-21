@@ -78,3 +78,24 @@ no courses
     {{product.name}}  
   </li>
 </ul>
+<!-- <span class="glyphicon glyphicon-star-empty
+"></span>
+<span class="glyphicon glyphicon-star
+"></span> -->
+<!-- <span class="glyphicon" 
+[class.glyphicon-star]=isSelected
+[class.glyphicon-star-empty]=!isSelected
+></span> -->
+<span class="glyphicon"
+[ngClass]="{
+'glyphicon-star':isSelected,
+'glyphicon-star-empty':!isSelected
+}"
+></span>
+<button class="btn btn-success" (click)="toggleFavourite()"> {{isSelected ? "Un Favourite me)":"Favourite me"}}</button>
+<h3>ngStyle</h3>
+<button
+    [style.backgroundColor]="canSave ? 'green':'gray'"
+    [style.color]="canSave ? 'white' : 'black'"
+    [style.fontWeight]="canSave ?'bold' :'normal'"
+>save</button>

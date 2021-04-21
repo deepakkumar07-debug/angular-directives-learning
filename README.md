@@ -208,5 +208,72 @@ When we use leading asterisk with our structural directives like `*ngIf *ngFor n
     </ng-template>
 ```
 ## ngClass
+why we should use ngClass when we have property binding
+- here we can see setting class attribute makes so noisy here
+```html
+<span class="glyphicon" 
+[class.glyphicon-star]=isSelected
+[class.glyphicon-star-empty]=!isSelected
+></span>
+<button class="btn btn-success" (click)="toggleFavourite()"> {{isSelected ? "Un Favourite me)":"Favourite me"}}</button>
+```
+
+**using ngClass**
+- its an example of attribute directive we use this to modify attribute of existing dom elements
+```html
+<span class="glyphicon"
+[ngClass]="{
+'glyphicon-star':isSelected,
+'glyphicon-star-empty':!isSelected
+}"
+></span>
+<button class="btn btn-success" (click)="toggleFavourite()"> {{isSelected ? "Un Favourite me)":"Favourite me"}}</button>
+```
 ## ngStyle
+ngStyle is also called attribute directive
+- below example we have 3 style bindings
+```html
+<button
+    [style.backgroundColor]="canSave ? 'green':'gray'"
+    [style.color]="canSave ? 'white' : 'black'"
+    [style.fontWeight]="canSave ?'bold' :'normal'"
+>save</button>
+```
+- when we deal with multiple styles we need to clean up this with 
+**ngStyle** directive
+```html
+<button
+    [ngStyle]="{
+        'backgroundColor':canSave ? 'green':'gray',
+        'color':canSave ? 'white' : 'black',
+        'fontWeight':canSave ?'bold' :'normal,
+    }"
+>save</button>
+- but some time we need to encapsulate this using class and render it
+```
+## Safe Traversal operator
+- what if run-time any of the objects property getting returned as undefined
+- how to handle this type of error
+thats why we use `?` `safe traversal operator`
+```html
+<!-- this is also one approach but this is not safe traversal operator -->
+<!-- what it does means it doesnt have value it not even generate the tag -->
+<span *ngIf="task.assignee">{{task.assignee.name}}</span>
+```
+
+another approach using safe traversal operator
+```html
+<!-- this will craete tag but not render the value of name if its undefined and we dont get any error on console -->
+<span>{{task.assignee?.name}}</span>
+```
+
+`ts file`
+```js
+task={
+    title:"some",
+    assignee:{
+        name:'some Name'
+    }
+}
+```
 ## Building Custom Directives

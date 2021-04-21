@@ -7,11 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-directives-learning';
-
+  isSelected=true;
   courses=["C","C++"];
   // courses=[];
   viewMode="map";
-
+  canSave=true;
   products=[
     {id:1,name:'Apple'},
     {id:2,name:'Banana'},
@@ -43,5 +43,8 @@ export class AppComponent {
   }
   trackProduct(index,product){
      return product ? product.id :undefined;
+  }
+  toggleFavourite(){
+    this.isSelected=!this.isSelected;
   }
 }
