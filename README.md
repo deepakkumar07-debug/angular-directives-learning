@@ -10,6 +10,46 @@ Use directives to modify the dom
 ## ngFor
  one of the built in directives in angular we used to rendering lists
 
+`app.component.ts`
+```js
+ products=[
+    {id:1,name:'Apple'},
+    {id:2,name:'Banana'},
+    {id:3,name:'Grape'}
+  ]
+```
+`app.component.html`
+```html
+<ul>
+  <li *ngFor="let product of products">
+    {{product.name}}
+  </li>
+</ul>
+```
+- this ngFor directives exports bunch of values that might help us to build certain feauture
+- imagine we render a table we want highlight a first row or last row or even row or odd row or we want disppaly an index these are the exported values from ng-directives
+```html
+<ul>
+    <!-- one of the exported values is index alias as i -->
+    <!-- index is number type -->
+    <!-- all others are boolean type so we use ngIf to render table as even in some color...   -->
+  <li *ngFor="let product of products;index as i">
+    {{i}}-{{product.name}}
+  </li>
+</ul>
+```
+<ul>
+    <!-- one of the exported values is index alias as i -->
+    <!-- index is number type -->
+    <!-- all others are boolean type so we use ngIf to render table as even in some color...   -->
+  <li *ngFor="let product of products;index as i even as isEven">
+    {{i}}-{{product.name}} <span *ngIf='isEven'>EVEN</span>
+  </li>
+</ul>
+```
+**Reference for ngForOf**
+here we can see the exported values
+https://angular.io/api/common/NgForOf
 ## ngIf
     there are times we want to show or hide part of a page depending on some condition
     - if condition evaluates true element will be added to the dom otherwise removed from dom.

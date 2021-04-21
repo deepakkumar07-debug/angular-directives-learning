@@ -60,3 +60,9 @@ no courses
   <div *ngSwitchCase="'list'">List View Content</div>
   <div *ngSwitchDefault>something went wrong</div>
 </div>
+<h1>Rendering Products using ngForOf directive</h1>
+<ul>
+  <li *ngFor="let product of products;index as i even as isEven">
+    {{i}}-{{product.name}} <span *ngIf='isEven'>EVEN</span>
+  </li>
+</ul>
