@@ -344,3 +344,78 @@ export class InputFormatDirective {
 <!-- <input type="text" appInputFormat [format]="'uppercase'"> -->
 <input type="text" [appInputFormat]="'uppercase'"> 
 ```
+
+# Zippy component
+- define component api
+- `app.component.html`
+```html
+<!-- we know input property in our custom component -->
+  <zippy title="Shipping Details"> 
+      Shipping Details Contents
+  </zippy>
+```
+`zippy.component.ts`
+```ts
+import { Component, Input, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'zippy',
+  templateUrl: './zippy.component.html',
+  styleUrls: ['./zippy.component.css']
+})
+export class ZippyComponent {
+  @Input('title') title:string;
+  // isExpanded:boolean =true;
+  isExpanded:boolean;
+
+  toggle() {
+    this.isExpanded=!this.isExpanded;
+  }
+ 
+}
+```
+
+`zippy.component.html`
+```html
+<div class="zippy">
+    <div class="zippy-heading"
+        [class.expanded]="isExpanded"
+        (click)="toggle()"
+    >
+        {{title}}
+        <span class="glyphicon"
+            [ngClass]="{
+                'glyphicon-chevron-up':isExpanded,
+                'glyphicon-chevron-down':!isExpanded
+            }"
+        ></span>
+    </div>
+    <div *ngIf="isExpanded" class="zippy-body">
+        <!-- inject markup from outside at runtime -->
+        <ng-content></ng-content>
+    </div>
+</div>
+```
+`zippy.component.css`
+
+```css
+.zippy {
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}
+.zippy-heading {
+    font-weight: bold;
+    padding: 20px;
+    cursor: pointer;
+}
+.zippy-body {
+    padding: 20px;
+
+}
+.expanded {
+    background-color: #f0f0f0;
+}
+.glyphicon {
+    float: right;
+}
+```
