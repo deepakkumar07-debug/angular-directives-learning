@@ -419,3 +419,6 @@ export class ZippyComponent {
     float: right;
 }
 ```
+ScreenShot :
+
+![alt text](https://github.com/deepakkumar07-debug/angular-directives-learning/blob/main/src/assets/1.png "screenshot")
