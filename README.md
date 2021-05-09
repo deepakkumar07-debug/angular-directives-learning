@@ -277,3 +277,70 @@ task={
 }
 ```
 
+# custom directive
+there are times we want control over behaviour of dom elements
+like input field to get value then out of focus get converted to uppercase or lowercase or format phone number
+
+`ng g d input-format`
+
+```ts
+import { Directive } from '@angular/core';
+
+@Directive({
+  selector: '[appInputFormat]'
+  // this selector has sqaure barckets which basically means any element that has this attribute 
+  // appInputFormat
+  //  if angular finds an element with this attribute its going to apply this directive on that element
+})
+export class InputFormatDirective {
+
+  constructor() { }
+
+}
+```
+-  here we want to add 2 dom events focus and blur
+- import HostListener from core this decorator allows us to subscribe to the events raised from the dom elements that is the dom element hosting this directive
+
+`input-format.directive.ts`
+```ts
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+
+@Directive({
+  selector: '[appInputFormat]'
+  // this selecto has sqaure barckets which basically means any element that has this attribute 
+  // appInputFormat
+  //  if angular finds an element with this attribute its going to apply this directive on that element
+  
+  //  here we want to add 2 dom events focus and blur
+})
+export class InputFormatDirective {
+  // @Input('format') format;
+  @Input('appInputFormat') format;
+
+  constructor(private el:ElementRef) { }
+// eventName when to call
+  @HostListener('focus') onFocus() {
+    console.log("on Focus");
+    
+  }
+
+  @HostListener('blur') onBlur() {
+    console.log("on Blur");
+    let value:string=this.el.nativeElement.value;
+    if (this.format=='lowercase')
+      this.el.nativeElement.value=value.toLowerCase();
+    else
+    this.el.nativeElement.value=value.toUpperCase();
+
+  }
+  
+}
+```
+
+`app.component.html`
+```html
+<h2>appInputFormat directive</h2>
+<!-- <input type="text" appInputFormat> -->
+<!-- <input type="text" appInputFormat [format]="'uppercase'"> -->
+<input type="text" [appInputFormat]="'uppercase'"> 
+```
